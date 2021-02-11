@@ -1,0 +1,181 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Delicious</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,600&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/slick/slick.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/slick/slick-theme.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+
+<div class="brand">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-3 col-md-4">
+                <div class="b-logo">
+                    <a href="/">
+                        <img src="{% static 'img/cooklogo3.png' %}">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-4">
+                <div>
+                    <a href="/">
+                        <img src="{% static 'img/sitename.png' %}">
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+                <form method="GET" action="{% url 'search' %}">
+                    {% csrf_token %}
+                    <div class="b-search">
+                        <input type="search" placeholder="Search" name="title">
+                        <button type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="nav-bar">
+    <div class="container">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <a href="#" class="navbar-brand">MENU</a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav mr-auto">
+                    <a href="/" class="nav-item nav-link active">Home</a>
+
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'add recipe' %}" class="nav-item nav-link">Add Recipe</a>
+                    {% endif %}
+                    {% if request.user.is_superuser %}
+                        <a href="{% url 'admin-recipes' %}" class="nav-item nav-link">Admin Panel</a>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                    <a class='class="nav-item nav-link' href="{% url 'user profile' user.id %}">
+                        {{ user.username }}</a>
+                    <a class='class="nav-item nav-link' href="{% url 'signout user' %}">
+                        Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
+                    <a href="{% url 'register' %}" class="nav-item nav-link">Register</a>
+                {% endif %}
+            </div>
+
+        </nav>
+    </div>
+</div>
+<div class="alert-center">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+{% block site_content %}
+
+{% endblock %}
+
+<div class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h3 class="title">Get in Touch</h3>
+                    <div class="contact-info">
+                        <p><i class="fa fa-map-marker"></i>Sofia,Bulgaria</p>
+                        <p><i class="fa fa-envelope"></i>stefannnn@abv.bg</p>
+                        <p><i class="fa fa-phone"></i>+777-777-777</p>
+                        <div class="social">
+                            <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/ladderofchaos"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.linkedin.com/in/stefan-tzvetanov-7809081b8/"><i
+                                    class="fab fa-linkedin-in"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h3 class="title">Useful Links</h3>
+                    <ul>
+                        <li><a href="#">Knives</a></li>
+                        <li><a href="#">Kitchen electronics</a></li>
+                        <li><a href="#">Sharpening stones</a></li>
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h3 class="title">Get Inspired</h3>
+                    <ul>
+                        <li><a href="https://www.bingingwithbabish.com/" target="_blank">Bingingwithbabish</a></li>
+                        <li><a href="https://tasty.co/" target="_blank">Tasty</a></li>
+                        <li><a href="https://www.sakara.com/" target="_blank">Sakara</a></li>
+                        <li><a href="https://milkbarstore.com/" target="_blank">Milk Bar</a></li>
+                        <li><a href="https://sethlui.com/" target="_blank">Sethlui.com</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-widget">
+                    <h3 class="title">Newsletter</h3>
+                    <div class="newsletter">
+                        <p>
+                            Sign in to receive the hottest cooking recipes every week!
+                        </p>
+                        <form action="{% url 'subscribe' %}" method="POST">
+                            {% csrf_token %}
+                            {{ e_form }}
+
+                            <button type='submit' class="btn" class="submit">Sub</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'lib/easing/easing.min.js' %}"></script>
+<script src="{% static 'lib/slick/slick.min.js' %}"></script>
+
+
+</body>
+</html>

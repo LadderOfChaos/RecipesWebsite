@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block site_content %}
+
+
+
+    <div class="cat-news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Handpicked by the staff</h2>
+                    <div class="row cn-slider">
+                        {% for r in recipe %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src="{{ r.image_url.url }}" class="center-cropped"/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'recipe' r.id %}">{{ r.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>Newest Recipes</h2>
+                    <div class="row cn-slider">
+                        {% for n in recipe_date %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src="{{ n.image_url.url }}" class="center-cropped"/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'recipe' n.id %}">{{ n.title }}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>World Cuisine Recipes</h2>
+                    <div class="row cn-slider">
+                        {% for ww in world_recipe %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src='{{ ww.image_url.url }}' class='center-cropped'/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'recipe' ww.id %}">{{ ww.title }}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>Bulgarian Cuisine Recipes</h2>
+                    <div class="row cn-slider">
+                        {% for bg in bg_recipe %}
+                            <div class="col-md-6">
+                                <div class="cn-img">
+                                    <img src='{{ bg.image_url.url }}' class='center-cropped'/>
+                                    <div class="cn-title">
+                                        <a href="{% url 'recipe' bg.id %}">{{ bg.title }}</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+{% endblock %}

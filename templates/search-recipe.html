@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block site_content %}
+
+    <div class="cat-news">
+        <div class="container">
+            <h2>Резултати:</h2>
+            <div class="row">
+                <div class="row cn-slider">
+                    {% for r in queryset %}
+                        <div class="col-md-4">
+                            <div class="cn-img center-cropped results-style">
+                                <img class='center-cropped' src="{{ r.image_url.url }}"/>
+                                <div class="cn-title">
+                                    <a href="{% url 'recipe' r.id %}">{{ r.title }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

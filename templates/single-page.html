@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block site_content %}
+
+
+    <div>
+        <div class="single-news">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="container">
+
+                            <h1>{{ recipe.title }}</h1>
+                            <div class="items-container">
+                                <div class="item">
+                                    <img class="cropped" src="{{ recipe.image_url.url }}" alt="recipe-image">
+                                    <div class="time">
+                                        <p class="p">Time to prepare: {{ recipe.time_needed }}Min</p>
+                                        <img src="{% static 'img/clock.png' %}">
+
+                                    </div>
+                                    <h3>Ingredients</h3>
+                                    <ul>
+                                        {% for ingredient in list_ingredients %}
+                                            <li class="li_style">{{ ingredient }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                    <h3>How to prepare?</h3>
+                                    <div class="disc">{{ recipe.description }}
+                                    </div>
+                                    <div class="buttons-container">
+                                        {% if can_edit %}
+                                            <a class="button edit btn btn-warning" href="{% url 'recipe-update' recipe.id %}">Edit</a>
+                                        {% endif %}
+                                        {% if can_delete %}
+                                            <a class="button delete btn btn-danger"
+                                               href="{% url 'recipe-delete' recipe.id %}">Delete</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="sidebar">
+                            <div class="sidebar-widget">
+                                <h2 class="sw-title">Recipe by Chef {{ recipe.author }}</h2>
+                                <div class="news-list">
+                                    <div class="nl-title">
+                                        <h4>More Recipes by this Chef</h4>
+                                        <ul>
+                                            {% for recipe in more_recipes %}
+                                                <li><a href="{% url 'recipe' recipe.pk %}">{{ recipe.title }} </a></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src={% static 'lib/easing/easing.min.js' %}></script>
+    <script src={% static 'lib/slick/slick.min.js' %}></script>
+
+    <script src="{% static 'js/main.js' %}></script>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block site_content %}
+
+    <div class="col-lg-10">
+        <div class="container">
+
+            <h1 class="text-center">Edit Recipe</h1>
+            <div class="add_container row">
+                <div class="add_recipesl row">
+                    <form method="post" enctype="multipart/form-data" action="{% url 'recipe-update' recipe.id %}">
+
+                        {% csrf_token %}
+                        <div class="add_recipesl form-row">
+                            {{ form }}
+                        </div>
+                        <button class="btn btn-primary mt-2" type="submit">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+
+

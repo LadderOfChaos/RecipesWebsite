@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block site_content %}
+<div class="col-lg-27">
+    <div class="container">
+
+        <h1 class="text-center">Delete Recipe</h1>
+        <div class="items-container">
+            <div class="item">
+                <form method="post" enctype="multipart/form-data" action="{% url 'recipe-delete' recipe.id %}">
+
+
+                    <div class="add_recipesl form-row">
+                        {{ form }}
+                        {% csrf_token %}
+                    </div>
+                    <button class="btn btn-danger mt-2" type="submit">Delete</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

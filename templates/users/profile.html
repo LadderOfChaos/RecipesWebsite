@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block site_content %}
+    <div class="text-center">
+        <h1>Welcome, {{ profile_user.username }}!</h1>
+
+
+        <img class="rounded-circle mb-3" src="{{ profile.profile_picture.url }}" alt="Generic placeholder image"
+             width="140"
+             height="140">
+        <h2>Email: {{ profile.user.email }}</h2>
+        <h2> Role:
+            {% if profile_user.is_staff %}
+                Crew Member
+            {% else %}
+                <h2>Member</h2>
+            {% endif %}
+        </h2>
+        <div class="w-50 m-auto">
+            <form action="{% url 'current user profile' %}" method="post" enctype="multipart/form-data">
+                {{ profile_form }}
+                {% csrf_token %}
+                <div>
+                    <button class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

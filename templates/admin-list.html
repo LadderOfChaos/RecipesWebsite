@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1 class="text-center">All recipes</h1>
+    <ul class="list-group">
+        {% for r in recipe %}
+            <li class="list-group-item text-center"><a href="{% url 'recipe' r.id %}">{{ r.title }}</a>
+        {% endfor %}
+    </ul>
+{% endblock %}
